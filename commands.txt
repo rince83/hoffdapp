@@ -1,0 +1,32 @@
+var hoff;    
+contract('HoffDapp', function(accounts) {
+  it("adding new member", function() {
+    Congress.deployed() // wait for the response
+    .then(function(temp) {
+      congress = temp;
+      return congress.addMember("John", 100, 100, 50, "buyer", {from:accounts[1]});
+    })
+    .then(function(txn){
+      console.log(txn);
+      // carry on
+    });
+  });
+});
+
+
+truffle compile && truffle migrate --reset
+
+
+
+var hoff
+HoffDapp.deployed().then(function(instance){hoff=instance})
+
+var admin = web3.eth.accounts[1]
+var user = web3.eth.accounts[2]
+
+
+hoff.addAdmin(admin)
+hoff.isAdmin.call(admin).then(console.log)
+hoff.register("c p", {from:user})
+hoff.userActive.call(user).then(console.log)
+hoff.getUserName.call(user).then(console.log)
