@@ -27,6 +27,19 @@ var user = web3.eth.accounts[2]
 
 hoff.addAdmin(admin)
 hoff.isAdmin.call(admin).then(console.log)
-hoff.register("c p", {from:user})
+hoff.addUser(user,"c p", {from:admin})
+
 hoff.userActive.call(user).then(console.log)
 hoff.getUserName.call(user).then(console.log)
+hoff.getUser.call(user).then(console.log)
+
+hoff.addMenu("id1","Schnitzel",750, {from:admin})
+hoff.consumeMenu("id1", {from:user})
+
+
+
+
+var filter = web3.eth.filter({fromBlock:0, toBlock: 'latest', address: "0x88090f5e0b29da7addfac6562b1c1725c4b66042", 'topics':[web3.sha3('MenuConsumed(address,string,int)')]});
+filter.watch(function(error, result) {
+   console.log(result);
+});
