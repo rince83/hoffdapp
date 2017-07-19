@@ -1,0 +1,43 @@
+var hoff;    
+contract('HoffDapp', function(accounts) {
+  it("adding new member", function() {
+    Congress.deployed() // wait for the response
+    .then(function(temp) {
+      congress = temp;
+      return congress.addMember("John", 100, 100, 50, "buyer", {from:accounts[1]});
+    })
+    .then(function(txn){
+      console.log(txn);
+      // carry on
+    });
+  });
+});
+
+
+truffle compile && truffle migrate --reset
+
+
+
+var hoff
+HoffDapp.deployed().then(function(instance){hoff=instance})
+
+var admin = web3.eth.accounts[1]
+var user = web3.eth.accounts[2]
+
+
+hoff.addAdmin(admin)
+hoff.isAdmin.call(admin).then(console.log)
+hoff.addUser(user,"DOBI IST TOLL", {from:admin})
+
+hoff.userActive.call(user).then(console.log)
+hoff.getUserName.call(user).then(console.log)
+hoff.getUser.call(user).then(console.log)
+
+hoff.addMenu("id1","Schnitzel",750, {from:admin})
+hoff.consumeMenu("id1", {from:user})
+
+
+
+
+var filter = web3.eth.filter({fromBlock:0, toBlock: 'latest', address: "0x88090f5e0b29da7addfac6562b1c1725c4b66042", 'topics':[web3.sha3('MenuConsumed(address,string,int)')]});
+filter.watch(function(error, result) {   console.log(result);});
