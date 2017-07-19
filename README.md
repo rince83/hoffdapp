@@ -28,24 +28,44 @@ in truffle docker container: start truffle console:
 ```truffle console```
 
 load instance of deployed contract:
+
 ```
 var hoff;
 HoffDapp.deployed().then(function(instance){hoff=instance});
 ```
+
 load user accounts into variables
+
 ```
 var admin = web3.eth.accounts[1]
 var user = web3.eth.accounts[2]
 ```
+
 add admin to contract
+
 ```hoff.addAdmin(admin)```
+
+
 check if admin
+
 ```hoff.isAdmin.call(admin).then(console.log)```
+
+
 add user from admin account
+
 ```hoff.addUser(user,"John Doe", {from:admin})```
+
+
 get user info from contract
+
 ```hoff.getUser.call(user).then(console.log)```
+
+
 add menu - called from admin account
+
 ```hoff.addMenu("id1","Burger",750, {from:admin})```
+
+
 consume menu - called from user account
+
 ```hoff.consumeMenu("id1", {from:user})```
