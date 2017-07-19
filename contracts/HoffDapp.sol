@@ -52,6 +52,11 @@ contract HoffDapp {
     userCount++;
   }
 
+  function deactiveUser(address addr) onlyAdmin {
+    require(users[addr].addr != 0);
+    users[addr].state = UserState.INACTIVE;
+  }
+
   function getUserName(address addr) returns (string name) {
     return users[addr].name;
   }
