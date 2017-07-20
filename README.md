@@ -14,7 +14,7 @@ Run container with truffle dev framework (start this command in truffle folder):
 
 ### Compile:
 in truffle docker container:
-```truffle compile && truffle migrate --reset```
+```truffle compile```
 
 ### Deploy to ethereum network
 in truffle docker container:
