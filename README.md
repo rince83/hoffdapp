@@ -6,7 +6,7 @@ Ethereum smart contract showcase.
 Run ethereum testrpc:
 ```docker run --rm -d --name testrpc -p 8545:8545 desmart/testrpc:latest```
 
-Run container with truffle dev framework:
+Run container with truffle dev framework (start this command in truffle folder):
 ```docker run -it --rm -v "${PWD}:/usr/src/app" --link testrpc -e "RPC_HOST=testrpc" --entrypoint=/bin/sh desmart/truffle:3.2```
 
 
@@ -69,3 +69,10 @@ add menu - called from admin account
 consume menu - called from user account
 
 ```hoff.consumeMenu("id1", {from:user})```
+
+
+
+To compile abi and bin files of smartcontract for e.g. web3j run:
+```docker run  -v ${PWD}/contracts:/src -v ${PWD}/build/contractArtifacts:/build ethereum/solc:stable  /src/HoffDapp.sol --bin --abi --optimize -o /build```
+
+
